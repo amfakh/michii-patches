@@ -1,3 +1,9 @@
+## [1.1.0-dev.3](https://github.com/heyymichii/michii-patches/compare/v1.1.0-dev.2...v1.1.0-dev.3) (2026-10-11)
+
+### ✨ New Features
+
+* Support LinkedIn 4.1.1259 and always show the settings shortcut ([3ba29a2](https://github.com/heyymichii/michii-patches/commit/3ba29a236136b3d8ac3d2a48bdf8a3dab039c7d0))
+
 ## [1.1.0-dev.2](https://github.com/heyymichii/michii-patches/compare/v1.1.0-dev.1...v1.1.0-dev.2) (2026-10-11)
 
 ### 🐛 Bug Fixes
