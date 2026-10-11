@@ -1,3 +1,9 @@
+## [1.1.0-dev.2](https://github.com/heyymichii/michii-patches/compare/v1.1.0-dev.1...v1.1.0-dev.2) (2026-10-11)
+
+### 🐛 Bug Fixes
+
+* Recommend LinkedIn 4.1.1255.1 instead of 4.1.1258 ([163bed7](https://github.com/heyymichii/michii-patches/commit/163bed7f8ba1e4a92dda5282b9e26f5d0ef601a5))
+
 ## [1.1.0-dev.1](https://github.com/heyymichii/michii-patches/compare/v1.0.1-dev.1...v1.1.0-dev.1) (2026-10-10)
 
 ### ✨ New Features
