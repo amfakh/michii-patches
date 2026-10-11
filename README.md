@@ -35,9 +35,14 @@ The app icon shortcut is added the first time LinkedIn opens after patching.
 
 | App | Version |
 |---|---|
-| LinkedIn (`com.linkedin.android`) | **4.1.1255.1** (APKMirror variant *Android 10+*) |
+| LinkedIn (`com.linkedin.android`) | **4.1.1259** (recommended), **4.1.1255.1** (APKMirror variant *Android 10+*, the APK, not the bundle) |
 
 Other versions are marked experimental and may not work.
+
+> [!NOTE]
+> **Signing in with Google doesn't work** in patched LinkedIn, because Google checks the app's signature.
+> Sign in with your e-mail and password instead. If you signed up with Google and don't have a password,
+> set one first on [linkedin.com](https://www.linkedin.com/checkpoint/rp/request-password-reset) ("Forgot password").
 
 ### How to use these patches
 
