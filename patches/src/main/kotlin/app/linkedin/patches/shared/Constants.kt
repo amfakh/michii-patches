@@ -17,8 +17,10 @@ object Constants {
             AppTarget(
                 version = "4.1.1255.1"
             ),
+            // Patches apply to 4.1.1258, but the settings entry and its shortcut don't appear there yet.
             AppTarget(
-                version = "4.1.1258"
+                version = "4.1.1258",
+                isExperimental = true
             ),
             AppTarget(
                 version = null,
