@@ -57,6 +57,14 @@ private object NavPanelSectionBindFingerprint : Fingerprint(
     parameters = listOf("Landroidx/databinding/ViewDataBinding;"),
 )
 
+/** MainActivity.onCreate(Bundle): every launcher icon of LinkedIn opens this activity. */
+private object MainActivityOnCreateFingerprint : Fingerprint(
+    definingClass = "Lcom/linkedin/android/infra/navigation/MainActivity;",
+    name = "onCreate",
+    returnType = "V",
+    parameters = listOf("Landroid/os/Bundle;"),
+)
+
 /**
  * Settings screen, reached from a "Michii Patches" item in the "Me" panel (plus a launcher
  * shortcut), and SduiFragment lifecycle hooks that drive the SDUI download button.
@@ -79,6 +87,13 @@ val settingsPatch = bytecodePatch {
                 const-string v0, "${bundleVersion()}"
                 return-object v0
             """
+        )
+
+        // Register the launcher shortcut and show "What's new" from the main screen. This doesn't depend on
+        // the "Me" panel or SDUI hooks, which change more often between LinkedIn versions.
+        MainActivityOnCreateFingerprint.method.addInstruction(
+            0,
+            "invoke-static/range { p0 .. p0 }, $EXTENSION_PACKAGE/SettingsShortcut;->onMainActivityCreated(Landroid/app/Activity;)V"
         )
 
         // Each return is replaced in place (rather than code inserted before it) because branches
@@ -170,7 +185,8 @@ private fun MutableMethod.returnIndices(opcode: Opcode) =
     implementation!!.instructions.withIndex().filter { it.value.opcode == opcode }.map { it.index }.reversed()
 
 /** Version of this patch bundle, from the manifest the build writes into the .mpp (Version attribute). */
-private fun bundleVersion(): String {
+/** Version of this patch bundle, read from the manifest of the .mpp. */
+fun bundleVersion(): String {
     val loader = object {}.javaClass.classLoader
     for (url in loader.getResources("META-INF/MANIFEST.MF")) {
         val attributes = url.openStream().use { java.util.jar.Manifest(it).mainAttributes }

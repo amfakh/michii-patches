@@ -20,17 +20,29 @@ Michii Patches removes ads and clutter from LinkedIn and adds features the app d
 - **Privacy:** open links directly without LinkedIn's warning page (including `lnkd.in` short
   links), remove tracking parameters from copied and shared links, and an optional analytics block.
 - **Disable double-tap like** on posts and photos.
-- **Settings:** a "Michii Patches" entry in the "Me" panel (tap your profile photo) to turn each
-  feature on or off, search settings, back up and restore them, see which patches are applied,
-  and check for updates.
+- **Settings:** turn each feature on or off, search settings, back up and restore them, see which
+  patches are applied, and check for updates. The settings are in English, or in Indonesian when
+  your phone uses Indonesian (change it under Other → Language).
+
+### Opening the settings
+
+- Tap your profile photo to open the "Me" panel, then **Michii Patches** (below "Saved posts"), or
+- long press the LinkedIn app icon on your home screen, then **Michii Patches**.
+
+The app icon shortcut is added the first time LinkedIn opens after patching.
 
 ### Supported version
 
 | App | Version |
 |---|---|
-| LinkedIn (`com.linkedin.android`) | **4.1.1255.1** (APKMirror variant *Android 10+*) |
+| LinkedIn (`com.linkedin.android`) | **4.1.1259** (recommended), **4.1.1255.1** (APKMirror variant *Android 10+*, the APK, not the bundle) |
 
 Other versions are marked experimental and may not work.
+
+> [!NOTE]
+> **Signing in with Google doesn't work** in patched LinkedIn, because Google checks the app's signature.
+> Sign in with your e-mail and password instead. If you signed up with Google and don't have a password,
+> set one first on [linkedin.com](https://www.linkedin.com/checkpoint/rp/request-password-reset) ("Forgot password").
 
 ### How to use these patches
 
@@ -43,14 +55,14 @@ Then patch LinkedIn with Morphe Manager. Do not share patched APKs; share this p
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.0.0](https://github.com/heyymichii/michii-patches/releases/tag/v1.0.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;11 patches total
+> **[v1.1.0-dev.3](https://github.com/heyymichii/michii-patches/releases/tag/v1.1.0-dev.3)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;11 patches total
 <details open>
 <summary>📦 LinkedIn&nbsp;&nbsp;•&nbsp;&nbsp;11 patches</summary>
 <br>
 
 **🎯 Supported versions:**
 
-| 4.1.1255.1 | 4.1.1258 |
+| 4.1.1255.1 | 4.1.1259 |
 | :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
@@ -70,6 +82,23 @@ Then patch LinkedIn with Morphe Manager. Do not share patched APKs; share this p
 </details>
 
 <!-- PATCHES_END -->
+
+### 🌐 Translations
+
+The settings screens are available in English, Bahasa Indonesia, Español, Português (Brasil), Français, Deutsch,
+Tiếng Việt, ไทย, Türkçe, Русский, and 日本語. They follow your phone's language, and you can pick another one under
+**Other → Language**.
+
+Found a wrong or awkward translation, or want to add a language? The texts are in
+[`extensions/extension/src/main/translations`](extensions/extension/src/main/translations), one JSON file per
+language with the English text as the key. Open an issue or a pull request.
+
+### 💖 Support
+
+If Michii Patches is useful to you, you can support its development:
+
+- [Ko-fi](https://ko-fi.com/heyymichii)
+- [Trakteer](https://trakteer.id/heyymichii) (for supporters in Indonesia)
 
 ### 🛠️ Building locally
 
