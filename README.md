@@ -35,7 +35,7 @@ The app icon shortcut is added the first time LinkedIn opens after patching.
 
 | App | Version |
 |---|---|
-| LinkedIn (`com.linkedin.android`) | **4.1.1259** (recommended), **4.1.1255.1** (APKMirror variant *Android 10+*, the APK, not the bundle) |
+| LinkedIn (`com.linkedin.android`) | **4.1.1261** (recommended), **4.1.1259**, **4.1.1255.1** (APKMirror variant *Android 10+*, the APK, not the bundle) |
 
 Other versions are marked experimental and may not work.
 
@@ -55,15 +55,15 @@ Then patch LinkedIn with Morphe Manager. Do not share patched APKs; share this p
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.1.0](https://github.com/heyymichii/michii-patches/releases/tag/v1.1.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;11 patches total
+> **[v1.1.1-dev.1](https://github.com/heyymichii/michii-patches/releases/tag/v1.1.1-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;11 patches total
 <details open>
 <summary>📦 LinkedIn&nbsp;&nbsp;•&nbsp;&nbsp;11 patches</summary>
 <br>
 
 **🎯 Supported versions:**
 
-| 4.1.1255.1 | 4.1.1259 |
-| :---: | :---: |
+| 4.1.1255.1 | 4.1.1259 | 4.1.1261 |
+| :---: | :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
