@@ -1,3 +1,9 @@
+## [1.2.0-dev.1](https://github.com/heyymichii/michii-patches/compare/v1.1.1...v1.2.0-dev.1) (2026-10-16)
+
+### ✨ New Features
+
+* Add Material You patch ([4c14ce2](https://github.com/heyymichii/michii-patches/commit/4c14ce2299163d770e15bf61075c678d520befd5)), closes [#6](https://github.com/heyymichii/michii-patches/issues/6)
+
 ## [1.1.1](https://github.com/heyymichii/michii-patches/compare/v1.1.0...v1.1.1) (2026-10-16)
 
 ### 🐛 Bug Fixes
