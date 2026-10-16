@@ -35,7 +35,7 @@ The app icon shortcut is added the first time LinkedIn opens after patching.
 
 | App | Version |
 |---|---|
-| LinkedIn (`com.linkedin.android`) | **4.1.1259** (recommended), **4.1.1255.1** (APKMirror variant *Android 10+*, the APK, not the bundle) |
+| LinkedIn (`com.linkedin.android`) | **4.1.1261** (recommended), **4.1.1259**, **4.1.1255.1** (APKMirror variant *Android 10+*, the APK, not the bundle) |
 
 Other versions are marked experimental and may not work.
 
