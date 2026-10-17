@@ -55,7 +55,7 @@ Then patch LinkedIn with Morphe Manager. Do not share patched APKs; share this p
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.2.0-dev.2](https://github.com/heyymichii/michii-patches/releases/tag/v1.2.0-dev.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;12 patches total
+> **[v1.2.0-dev.3](https://github.com/heyymichii/michii-patches/releases/tag/v1.2.0-dev.3)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;12 patches total
 <details open>
 <summary>📦 LinkedIn&nbsp;&nbsp;•&nbsp;&nbsp;12 patches</summary>
 <br>
