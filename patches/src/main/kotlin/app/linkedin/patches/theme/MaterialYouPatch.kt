@@ -1,8 +1,17 @@
 package app.linkedin.patches.theme
 
 import app.linkedin.patches.shared.Constants.COMPATIBILITY_LINKEDIN
+import app.linkedin.patches.shared.Constants.EXTENSION_PACKAGE
+import app.linkedin.patches.shared.settingsPatch
+import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
+import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.ResourcePatchContext
+import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.resourcePatch
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.ClassDef
+import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.WideLiteralInstruction
 
 /**
  * LinkedIn's blue palette (blue_* and the Mercado design system's mercado_mvp_blue_*) mapped to
@@ -53,15 +62,8 @@ private val NIGHT_BACKGROUNDS = mapOf(
     "color_status_bar" to "system_neutral1_900",
 )
 
-@Suppress("unused")
-val materialYouPatch = resourcePatch(
-    name = "Material You",
-    description = "Uses your wallpaper colors (Android 12+) for accents and backgrounds instead of LinkedIn blue and gray. " +
-        "Some screens drawn by LinkedIn's servers may keep their own colors.",
-    default = false
-) {
-    compatibleWith(COMPATIBILITY_LINKEDIN)
-
+/** Resource colors: XML layouts and the View based screens. */
+private val materialYouResourcePatch = resourcePatch {
     execute {
         val colors = mutableMapOf<String, String>()
         for ((tone, accent) in ACCENT_SHADES) {
@@ -87,4 +89,59 @@ private fun ResourcePatchContext.writeColors(directory: String, colors: Map<Stri
         appendLine("</resources>")
     }
     get("res").resolve(directory).apply { mkdirs() }.resolve("colors.xml").writeText(xml)
+}
+
+/** Packages of the Compose themes (Delux and Mercado), which hardcode their palettes in static initializers. */
+private val COMPOSE_THEME_PACKAGES = listOf(
+    "Lcom/linkedin/android/delux/compose/theme",
+    "Lcom/linkedin/android/mercado/mvp/compose/",
+)
+
+/** Colors replaced at runtime, keep in sync with MaterialYou.java. */
+private val COMPOSE_COLORS = setOf(
+    0xF6FBFF, 0xE8F3FF, 0xD0E8FF, 0xD2E9FF, 0xA8D4FF, 0xAAD6FF, 0x70B5F9, 0x71B7FB,
+    0x378FE9, 0x0A66C2, 0x004182, 0x09223B, 0x0A2037,
+    0x1B1F23, 0x1D2226, 0x293037, 0x293138, 0xF4F2EE, 0xF3F2EF,
+).map { 0xFF000000L or it.toLong() }.toSet()
+
+@Suppress("unused")
+val materialYouPatch = bytecodePatch(
+    name = "Material You",
+    description = "Uses your wallpaper colors (Android 12+) for accents and backgrounds instead of LinkedIn blue and gray. " +
+        "Some screens drawn by LinkedIn's servers may keep their own colors.",
+    default = false
+) {
+    compatibleWith(COMPATIBILITY_LINKEDIN)
+    dependsOn(settingsPatch, materialYouResourcePatch)
+
+    execute {
+        val themes = mutableListOf<ClassDef>()
+        classDefForEach { classDef ->
+            if (COMPOSE_THEME_PACKAGES.any { classDef.type.startsWith(it) } &&
+                classDef.methods.any { it.name == "<clinit>" }
+            ) themes += classDef
+        }
+
+        var replaced = 0
+        themes.forEach { classDef ->
+            val method = mutableClassDefBy(classDef).methods.first { it.name == "<clinit>" }
+            val colors = method.implementation!!.instructions.withIndex().filter { (_, instruction) ->
+                instruction.opcode == Opcode.CONST_WIDE &&
+                    (instruction as WideLiteralInstruction).wideLiteral in COMPOSE_COLORS
+            }
+            // From the end, so the indexes of the earlier constants stay valid.
+            colors.reversed().forEach { (index, instruction) ->
+                val register = (instruction as OneRegisterInstruction).registerA
+                method.addInstructions(
+                    index + 1,
+                    """
+                        invoke-static/range { v$register .. v${register + 1} }, $EXTENSION_PACKAGE/MaterialYou;->color(J)J
+                        move-result-wide v$register
+                    """
+                )
+            }
+            replaced += colors.size
+        }
+        if (replaced == 0) throw PatchException("No Compose theme colors found")
+    }
 }
