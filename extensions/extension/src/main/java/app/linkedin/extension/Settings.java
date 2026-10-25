@@ -102,6 +102,10 @@ public final class Settings {
         return false;
     }
 
+    public static boolean isGmsCoreSupportIncluded() {
+        return false;
+    }
+
     static boolean disableDoubleTapLike() {
         return isDisableDoubleTapLikeIncluded() && get(DISABLE_DOUBLE_TAP_LIKE, true);
     }

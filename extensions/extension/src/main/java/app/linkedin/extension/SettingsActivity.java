@@ -713,6 +713,7 @@ public final class SettingsActivity extends Activity {
                 {"Open links directly", Settings.isOpenLinksDirectlyIncluded()},
                 {"Sanitize share links", Settings.isSanitizeShareLinksIncluded()},
                 {"Block tracking", Settings.isBlockTrackingIncluded()},
+                {"GmsCore support", Settings.isGmsCoreSupportIncluded()},
         };
     }
 
